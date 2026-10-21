@@ -1,0 +1,21 @@
+{
+  "name": "clase-02-typescript",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Clase 02 - Introduccion a TypeScript. Punto de partida.",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "tsc",
+    "01": "tsx 01-tipos-basicos.ts",
+    "02": "tsx 02-entorno.ts",
+    "03": "tsx 03-objetos-e-interfaces.ts",
+    "04": "tsx 04-uniones-y-funciones.ts",
+    "05": "tsx 05-enums-y-tuplas.ts",
+    "06": "tsx 06-any-vs-unknown.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.2"
+  }
+}
