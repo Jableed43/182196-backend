@@ -13,12 +13,18 @@ const deNumeroANombre = NivelAcceso[3];
 // Enum de texto
 // TODO: enum TipoRueda con CIUDAD, DEPORTIVA y TODOTERRENO,
 //       y una const ruedas que use una de las opciones
-
+enum TipoRueda {
+  CIUDAD = "Ciudad",
+  DEPORTIVA = "Deportiva",
+  TODOTERRENO = "Todoterreno"
+}
 // const malas: TipoRueda = "Ciudad";
+const ruedas: TipoRueda = TipoRueda.TODOTERRENO
 
 // La alternativa liviana: desaparece al transpilar
 // TODO: type Nivel con "bajo", "medio" y "alto"
 
+type Nivel = "bajo" | "medio" | "alto"
 const nivel: Nivel = "alto";
 
 // Tupla: longitud fija, un tipo por posición
