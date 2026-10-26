@@ -1,0 +1,21 @@
+{
+  "name": "clase-03-poo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Clase 03 - Programacion Orientada a Objetos. Punto de partida.",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "tsc",
+    "01": "tsx 01-clases-y-objetos.ts",
+    "02": "tsx 02-constructor-y-new.ts",
+    "03": "tsx 03-herencia.ts",
+    "04": "tsx 04-polimorfismo.ts",
+    "05": "tsx 05-abstraccion.ts",
+    "06": "tsx 06-ejercicio-empleados.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.2"
+  }
+}
