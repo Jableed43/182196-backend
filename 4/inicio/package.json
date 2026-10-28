@@ -1,0 +1,17 @@
+{
+  "name": "clase-04-concesionario",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Clase 04 - Aplicacion practica de TypeScript. Carpeta de arranque para los alumnos.",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "tsc",
+    "start": "tsx index.ts",
+    "dev": "tsx watch index.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.2"
+  }
+}
