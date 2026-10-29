@@ -9,3 +9,9 @@ import type { TipoCombustible } from "./partes.js";
 //
 // Escribilo como contrato: define QUE debe tener, nunca COMO lo hace.
 // Si en este archivo te aparece una llave que abre un cuerpo, te fuiste.
+export interface Motor {
+    arrancar(): void;
+    apagar(): void;
+    estaEncendido: boolean;
+    tipoCombustible: TipoCombustible;
+}
