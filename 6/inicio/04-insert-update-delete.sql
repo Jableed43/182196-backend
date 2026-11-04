@@ -1,61 +1,36 @@
--- Requiere que el archivo 03 ya haya creado 'cliente' y 'pedido'.
+-- 04 — INSERT, UPDATE y DELETE
 
+CREATE DATABASE IF NOT EXISTS modelado
+    CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE modelado;
 
--- =====================  INSERT  =====================
+DROP TABLE IF EXISTS Pedidos;
+DROP TABLE IF EXISTS Clientes;
 
--- TODO: insertá 2 clientes nuevos en UNA sola sentencia
+-- TODO: Clientes (id_cliente, nombre, email UNIQUE, telefono)
+-- TODO: Pedidos  (id_pedido, producto, precio, fecha, id_cliente FK)
+-- TODO: 3 clientes y 4 pedidos
 
--- LAST_INSERT_ID() devuelve el id que se acaba de generar.
--- Es lo que vas a usar desde Node para insertar un padre y después sus hijos.
-INSERT INTO cliente (nombre, email) VALUES ('Nora Vega', 'nora@mail.com');
-SELECT LAST_INSERT_ID() AS 'id recien creado';
+-- 3.1 INSERT
+-- TODO: insertá 2 clientes en UNA sola sentencia
+-- TODO: insertá uno y mostrá LAST_INSERT_ID() y usalo para su primer pedido
+-- TODO: intentá repetir un email. Anotá el error.
+-- TODO: intentá un pedido con id_cliente = 999. Anotá el error.
+-- TODO: mirá SELECT @@sql_mode -- esta STRICT_TRANS_TABLES?
+--       probá un INSERT sin el email (campo NOT NULL). Da error?
 
--- TODO: insertá un pedido de Nora usando LAST_INSERT_ID()
+-- 3.2 UPDATE
+-- TODO: SELECT primero, UPDATE con el mismo WHERE, SELECT para confirmar
+-- TODO: subile 10% el precio a un producto usando precio = precio * 1.10
 
--- Lo que el INSERT no deja hacer. Descomentá de a uno:
--- INSERT INTO cliente (nombre, email) VALUES ('Otra', 'nora@mail.com');
--- INSERT INTO cliente (nombre) VALUES ('Sin email');
--- INSERT INTO pedido (fecha, producto, precio, idcliente) VALUES ('2026-04-03', 'Tablet', 300000.00, 999);
+-- El UPDATE sin WHERE, con red:
+-- TODO: START TRANSACTION, UPDATE sin WHERE sobre telefono,
+--       SELECT ROW_COUNT() pegado al UPDATE, mirá el desastre, ROLLBACK
 
--- =====================  UPDATE  =====================
--- La costumbre que salva: WHERE antes que SET, y un SELECT antes de ejecutar.
+-- 3.3 DELETE
+-- TODO: SELECT primero, DELETE de un pedido puntual
+-- TODO: intentá borrar un cliente que tiene pedidos. Anotá el error.
+-- TODO: borrá uno que no tenga pedidos
+-- TODO: el DELETE sin WHERE, dentro de START TRANSACTION + ROLLBACK
 
--- TODO: 1) SELECT del cliente que vas a tocar
--- TODO: 2) el UPDATE de su telefono, con el MISMO where
--- TODO: 3) SELECT para confirmar
-
--- TODO: subile 10% el precio a los pedidos de 'Teclado'.
---       El SET puede usar el valor anterior de la propia columna.
-
--- --- EL UPDATE SIN WHERE, con red ---
-SELECT idcliente, nombre, telefono FROM cliente;
-
-START TRANSACTION;
--- TODO: UPDATE cliente SET telefono = '000-000';   (sin WHERE)
--- TODO: SELECT ROW_COUNT()   <- va PEGADO al UPDATE, sin nada en el medio
--- TODO: mirá la tabla: ¿cuántas filas cambiaron?
-ROLLBACK;
-
-SELECT idcliente, nombre, telefono FROM cliente;   -- intacto
-
--- =====================  DELETE  =====================
-
--- TODO: borrá el pedido 1 (mirándolo antes con un SELECT)
-
--- La integridad referencial también actúa acá. Descomentá:
--- DELETE FROM cliente WHERE idcliente = 1;
--- TODO: anotá el error y explicá qué te está protegiendo
-
--- TODO: borrá un cliente que NO tenga pedidos. ¿Ese sí funciona?
-
--- --- EL DELETE SIN WHERE, con red ---
-SELECT COUNT(*) AS 'pedidos antes' FROM pedido;
-
-START TRANSACTION;
--- TODO: DELETE FROM pedido;  y contá las filas que quedaron
-ROLLBACK;
-
-SELECT COUNT(*) AS 'pedidos despues' FROM pedido;
-
--- TODO: anotá tres diferencias entre DELETE y TRUNCATE
+-- TODO: anotá en qué se diferencia TRUNCATE de DELETE

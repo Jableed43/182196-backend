@@ -1,56 +1,37 @@
--- N:M — un alumno cursa muchas materias y una materia tiene muchos alumnos.
+-- 02 — Cardinalidad N:M · Alumnos, Materias e Inscripciones
 
+CREATE DATABASE IF NOT EXISTS modelado
+    CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE modelado;
 
--- =====================  PARTE 1 · La forma incorrecta  =====================
-DROP TABLE IF EXISTS alumno_mal;
+-- PARTE 1 · La forma que la clase dice que NO hay que usar
+DROP TABLE IF EXISTS Alumnos_mal;
 
-CREATE TABLE alumno_mal (
-    idalumno INT PRIMARY KEY AUTO_INCREMENT,
-    nombre   VARCHAR(100) NOT NULL,
-    materias VARCHAR(200)
-) ENGINE=InnoDB;
+-- TODO: Alumnos_mal (id_alumno, nombre, materias VARCHAR(200))
+--       con las materias separadas por comas en un solo campo
+-- TODO: insertá 3 alumnos asi
+-- TODO: contá los que cursan Fisica con LIKE
+-- TODO: agregá un alumno de "Fisica II" y volvé a contar. Que pasó?
+-- TODO: y la nota de Ana en Fisica, dónde la guardarías?
 
-INSERT INTO alumno_mal (nombre, materias) VALUES
-    ('Ana Pérez',  'Matemática, Física, Química'),
-    ('Luis Gómez', 'Matemática, Historia'),
-    ('Sofía Díaz', 'Física');
+-- PARTE 2 · La forma correcta: tabla intermedia
+DROP TABLE IF EXISTS Inscripciones;
+DROP TABLE IF EXISTS Alumnos;
+DROP TABLE IF EXISTS Materias;
 
-SELECT * FROM alumno_mal;
+-- TODO: Alumnos       (id_alumno, nombre, email UNIQUE)
+-- TODO: Materias      (id_materia, nombre UNIQUE)
+-- TODO: Inscripciones (id_inscripcion, id_alumno FK, id_materia FK, nota)
+--                     + UNIQUE (id_alumno, id_materia)
 
--- TODO: intentá responder estas tres con ESTA tabla:
---       a) ¿cuántos alumnos cursan Física?
---       b) ¿cuántas materias cursa cada alumno?
---       c) ¿qué nota se sacó Ana en Física?
---       Anotá cuál no se puede, y por qué las otras dos son frágiles.
+-- TODO: 3 alumnos, 4 materias y 6 inscripciones
 
--- =====================  PARTE 2 · La forma correcta  =====================
-DROP TABLE IF EXISTS inscripcion;
-DROP TABLE IF EXISTS alumno;
-DROP TABLE IF EXISTS materia;
+-- Las mismas preguntas, ahora con JOINs:
+-- TODO: cuántos alumnos cursan Fisica (exacto, sin LIKE)
+-- TODO: cuántas materias cursa cada alumno
+-- TODO: qué nota se sacó Ana en Fisica
+-- TODO: renombrá una materia. Cuántas filas tocaste?
+-- TODO: el promedio de cada alumno
 
--- TODO: crear 'alumno' (idalumno, nombre, email UNIQUE)
-
--- TODO: crear 'materia' (idmateria, nombre UNIQUE)
-
--- TODO: crear 'inscripcion':
---       idinscripcion, idalumno, idmateria, fecha_inscripcion, nota
---       las DOS foreign keys
---       un UNIQUE (idalumno, idmateria)  -> no inscribirse dos veces
---       un CHECK para que la nota esté entre 0 y 10
-
--- TODO: insertar 3 alumnos, 4 materias y 6 inscripciones
---       (dejá al menos una con nota NULL: está cursando)
-
--- TODO: respondé ahora a), b) y c) con JOINs
-
--- TODO: renombrá una materia con UN solo UPDATE
---       y comprobá que cambió para todos los inscriptos
-
--- TODO: sacá el promedio de cada alumno (lo que antes era imposible)
-
--- Lo que protegen las restricciones. Descomentá de a uno:
--- INSERT INTO inscripcion (idalumno, idmateria, fecha_inscripcion) VALUES (1, 2, '2026-04-01');
--- INSERT INTO inscripcion (idalumno, idmateria, fecha_inscripcion) VALUES (99, 1, '2026-04-01');
-
-SHOW CREATE TABLE inscripcion;
+-- TODO: intentá inscribir dos veces al mismo alumno a la misma materia
+-- TODO: intentá inscribir un alumno que no existe
