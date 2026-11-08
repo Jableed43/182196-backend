@@ -1,0 +1,17 @@
+{
+  "name": "clase-07-mysql-node",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Clase 07 - MySQL2 + Node.js",
+  "scripts": {
+    "lc1": "node live-coding-1-pool.js",
+    "lc2": "node live-coding-2-consultas-seguras.js",
+    "lc3": "node server.js",
+    "ejercicio": "node ejercicio-biblioteca.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "mysql2": "^3.11.5"
+  }
+}
